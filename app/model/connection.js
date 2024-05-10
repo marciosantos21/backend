@@ -49,8 +49,7 @@ module.exports = {
         }
         
         const pool = await connectBank(); //inicia conexão
-        const sql = `UPDATE ${table} SET ? WHERE ${where}`;
-        const [rows] = await pool.query(sql, set);
+        const [rows] = await pool.query(`UPDATE ${table} SET ? WHERE ${where}`, [set]);
 
         return await rows;
     },

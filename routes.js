@@ -26,10 +26,11 @@ app.use(bodyParser.json());
 //Importação usuasio
 const CreateUser  = require('./app/controller/user/create')
 const UpdateUser  = require('./app/controller/user/update')
+const DeleteUser  = require('./app/controller/user/delete')
 
 
 // versionamento de rotas
-app.use('/v1', basicAuth, CreateUser, UpdateUser)
+app.use('/v1', basicAuth, CreateUser, UpdateUser, DeleteUser)
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta: ${port}`);

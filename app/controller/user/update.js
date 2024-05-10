@@ -47,10 +47,8 @@ router.put('/user/update', async (req, res) =>{
 
     //criando novo registro de usuario
     const updateUser = await Update('users', dadosInfo, `id = ${userID}`);
-    
-    console.log(updateUser)
 
-    //verificando se registro realemente foi alterado
+    //verificando se registro foi alterado
     if(!updateUser?.affectedRows){
         return res.status(200).send({ status: false, info: `Ocorreu um erro ao atualizar ${name}.` })
     };

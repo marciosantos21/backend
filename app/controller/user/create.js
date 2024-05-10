@@ -42,7 +42,7 @@ router.post('/user/create', async (req, res) =>{
     //criando novo registro de usuario
     const newUser = await Insert('users', dadosInfo);
 
-    //verificando se registro realemente foi criado
+    //verificando se registro foi criado
     if(!newUser?.insertId){
         return res.status(200).send({ status: false, info: `Ocorreu um erro ao registrar ${name}.` })
     };
