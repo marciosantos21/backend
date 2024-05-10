@@ -19,17 +19,17 @@ router.post('/user/create', async (req, res) =>{
     const { name, email, password } = req.body
 
     if(!name || !email || !password){
-        return res.sendStatus(400)
+        return res.jsonStatus(400)
     }
 
     //Verifica se email existe na base de dados
     if(await ReadEmail(email)){
-        return res.status(200).send({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
+        return res.status(200).json({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
     }
 
     //verifica se email é valido
     if(!await validateEmail(email)){
-        return res.status(200).send({ status: false, info: "Informe um email válido." })
+        return res.status(200).json({ status: false, info: "Informe um email válido." })
     }
 
     //configurando dados para a inserção
@@ -44,11 +44,11 @@ router.post('/user/create', async (req, res) =>{
 
     //verificando se registro foi criado
     if(!newUser?.insertId){
-        return res.status(200).send({ status: false, info: `Ocorreu um erro ao registrar ${name}.` })
+        return res.status(200).json({ status: false, info: `Ocorreu um erro ao registrar ${name}.` })
     };
     
     //criando resposta para usuario final
-    return res.status(200).send({ status: true, info: `${name} adicionado com sucesso.` })
+    return res.status(200).json({ status: true, info: `${name} adicionado com sucesso.` })
 });
 /* FINAL : CRIANDO REGISTRO DE USUARIOS */
 

@@ -19,13 +19,13 @@ router.delete('/user/delete', async (req, res) =>{
     const { userID } = req.body
 
     if(!userID){
-        return res.sendStatus(400)
+        return res.jsonStatus(400)
     }
 
     //Buscando usuario
     const Usuario = await ReadUser(userID)
     if(!Usuario){
-        return res.status(200).send({ status: false, info: "Usuário removido com sucesso." })
+        return res.status(200).json({ status: false, info: "Usuário removido com sucesso." })
     }
 
     //removendo registro de usuario
@@ -33,11 +33,11 @@ router.delete('/user/delete', async (req, res) =>{
     
     //verificando se registro foi removido
     if(!removeUser?.affectedRows){
-        return res.status(200).send({ status: false, info: `Ocorreu um erro ao remover ${Usuario?.name ? Usuario?.name : 'usuário'}.` })
+        return res.status(200).json({ status: false, info: `Ocorreu um erro ao remover ${Usuario?.name ? Usuario?.name : 'usuário'}.` })
     };
     
     //criando resposta para usuario final
-    return res.status(200).send({ status: true, info: `${Usuario?.name ? Usuario?.name : 'Usuário'} removido com sucesso.` })
+    return res.status(200).json({ status: true, info: `${Usuario?.name ? Usuario?.name : 'Usuário'} removido com sucesso.` })
 });
 /* FINAL : REMOVENDO REGISTRO DE USUARIOS */
 

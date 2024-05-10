@@ -99,12 +99,20 @@ module.exports = {
         return await rows[0];
     },
 
-    //Busca os usuario
+    //Busca usuario unico
     async ReadUser(id){
         const pool = await connectBank(); //inicia conexão
         const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
         
         return await rows[0];
+    },
+
+    //Busca todos os usuarios
+    async ReadAllUser(){
+        const pool = await connectBank(); //inicia conexão
+        const [rows] = await pool.query('SELECT * FROM users');
+        
+        return await rows;
     },
 
     //Verifica se usaurio não esta informando algum email que ja existe no siatema

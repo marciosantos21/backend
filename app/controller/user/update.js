@@ -20,22 +20,22 @@ router.put('/user/update', async (req, res) =>{
     const { userID, name, email, password } = req.body
 
     if(!userID || !name || !email || !password){
-        return res.sendStatus(400)
+        return res.jsonStatus(400)
     }
 
     //Buscando usuario
     if(!await ReadUser(userID)){
-        return res.status(200).send({ status: false, info: "Usuário não encontrado no sistema." })
+        return res.status(200).json({ status: false, info: "Usuário não encontrado no sistema." })
     }
 
     //Verifica se email existe na base de dados
     if(await DistinctEmail(userID, email)){
-        return res.status(200).send({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
+        return res.status(200).json({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
     }
 
     //verifica se email é valido
     if(!await validateEmail(email)){
-        return res.status(200).send({ status: false, info: "Informe um email válido." })
+        return res.status(200).json({ status: false, info: "Informe um email válido." })
     }
 
     //configurando dados para o update
@@ -50,11 +50,11 @@ router.put('/user/update', async (req, res) =>{
 
     //verificando se registro foi alterado
     if(!updateUser?.affectedRows){
-        return res.status(200).send({ status: false, info: `Ocorreu um erro ao atualizar ${name}.` })
+        return res.status(200).json({ status: false, info: `Ocorreu um erro ao atualizar ${name}.` })
     };
     
     //criando resposta para usuario final
-    return res.status(200).send({ status: true, info: `${name} alterado com sucesso.` })
+    return res.status(200).json({ status: true, info: `${name} alterado com sucesso.` })
 });
 /* FINAL : ALTERANDO REGISTRO DE USUARIOS */
 
