@@ -2,7 +2,7 @@
  * 
  * @author Marcio Santos
  * @version 0.1
- * @description Conexão e interações com o banco de dados
+ * @description Responsavel por criar usuario
  * 
  */
 
@@ -14,7 +14,7 @@ const { ReadEmail, Insert } = require('../../model/connection')
 
 
 /* INICIO : CRIANDO REGISTRO DE USUARIOS */
-router.post('/create', async (req, res) =>{
+router.post('/user/create', async (req, res) =>{
 
     const { name, email, password } = req.body
 

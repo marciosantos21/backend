@@ -2,7 +2,7 @@
  * 
  * @author Marcio Santos
  * @version 0.1
- * @description Conexão e interações com o banco de dados
+ * @description Funções gerais para facilitar a usabilidade e diminuir códigos
  * 
  */
 

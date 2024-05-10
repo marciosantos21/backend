@@ -24,11 +24,12 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 app.use(bodyParser.json());
 
 //Importação usuasio
-const userRouter  = require('./app/controller/user/create')
+const CreateUser  = require('./app/controller/user/create')
+const UpdateUser  = require('./app/controller/user/update')
 
 
-// Rota do usuario
-app.use('/user', basicAuth, userRouter)
+// versionamento de rotas
+app.use('/v1', basicAuth, CreateUser, UpdateUser)
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta: ${port}`);

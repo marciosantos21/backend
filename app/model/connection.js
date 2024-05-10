@@ -49,10 +49,10 @@ module.exports = {
         }
         
         const pool = await connectBank(); //inicia conexão
-        const sql = `UPDATE ${table} SET ? ${where}`;
-        const [rows] = await pool.query(sql, [set]);
+        const sql = `UPDATE ${table} SET ? WHERE ${where}`;
+        const [rows] = await pool.query(sql, set);
 
-        return await rows[0];
+        return await rows;
     },
 
     // qualquer DELETE simples
@@ -92,9 +92,26 @@ module.exports = {
         }
     },
 
+    //Busca os Email´s já existentes no sistema
     async ReadEmail(email){
         const pool = await connectBank(); //inicia conexão
         const [rows] = await pool.query('SELECT * FROM users WHERE email = ?', [email]);
+        
+        return await rows[0];
+    },
+
+    //Busca os usuario
+    async ReadUser(id){
+        const pool = await connectBank(); //inicia conexão
+        const [rows] = await pool.query('SELECT * FROM users WHERE id = ?', [id]);
+        
+        return await rows[0];
+    },
+
+    //Verifica se usaurio não esta informando algum email que ja existe no siatema
+    async DistinctEmail(id, email){
+        const pool = await connectBank(); //inicia conexão
+        const [rows] = await pool.query('SELECT * FROM users WHERE id <> ? AND email = ?', [id, email]);
         
         return await rows[0];
     }
