@@ -91,6 +91,14 @@ module.exports = {
         }
     },
 
+    //
+    async AuthLogin(email, password){
+        const pool = await connectBank(); //inicia conexão
+        const [rows] = await pool.query('SELECT * FROM users WHERE email = ? AND password = ?', [email, password]);
+        
+        return await rows[0];
+    },
+
     //Busca os Email´s já existentes no sistema
     async ReadEmail(email){
         const pool = await connectBank(); //inicia conexão

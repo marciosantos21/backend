@@ -19,7 +19,7 @@ router.delete('/user/delete', async (req, res) =>{
     const { userID } = req.body
 
     if(!userID){
-        return res.jsonStatus(400)
+        return res.sendStatus(400)
     }
 
     //Buscando usuario

@@ -23,7 +23,10 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
 
 app.use(bodyParser.json());
 
-//Importação usuasio
+//Requisições da Autenticação
+const AuthUser      = require('./app/controller/auth/login')
+
+//Requisições do Usuário
 const ReadUser      = require('./app/controller/user/read')
 const CreateUser    = require('./app/controller/user/create')
 const UpdateUser    = require('./app/controller/user/update')
@@ -32,7 +35,13 @@ const DeleteUser    = require('./app/controller/user/delete')
 
 
 // versionamento de rotas
-app.use('/v1', basicAuth, ReadUser, CreateUser, UpdateUser, DeleteUser)
+app.use('/v1', basicAuth, 
+    AuthUser,
+    ReadUser, 
+    CreateUser, 
+    UpdateUser, 
+    DeleteUser,
+)
 
 app.listen(port, () => {
     console.log(`Servidor rodando na porta: ${port}`);

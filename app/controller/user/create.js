@@ -19,7 +19,7 @@ router.post('/user/create', async (req, res) =>{
     const { name, email, password } = req.body
 
     if(!name || !email || !password){
-        return res.jsonStatus(400)
+        return res.sendStatus(400)
     }
 
     //Verifica se email existe na base de dados

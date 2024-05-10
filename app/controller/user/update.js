@@ -20,7 +20,7 @@ router.put('/user/update', async (req, res) =>{
     const { userID, name, email, password } = req.body
 
     if(!userID || !name || !email || !password){
-        return res.jsonStatus(400)
+        return res.sendStatus(400)
     }
 
     //Buscando usuario
