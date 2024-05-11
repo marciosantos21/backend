@@ -23,7 +23,7 @@ router.post('/auth/login', async (req, res) => {
     //Verificao de login
     const Login = await AuthLogin(email, md5(password))
     if(!Login){
-        return res.status(200).json({ status: false, info: "Credenciais incorretas. Por favor, verifique seu e-mail e senha e tente novamente." })
+        return res.status(404).json({ status: false, info: "Credenciais incorretas. Por favor, verifique seu e-mail e senha e tente novamente." })
     }
     
     //criando resposta para usuario final

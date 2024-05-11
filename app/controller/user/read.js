@@ -27,7 +27,7 @@ router.post('/user/read', async (req, res) =>{
         //Buscando todos usuarios
         const Usuario = await ReadAllUser()
         if(!Usuario || !Usuario[0]){
-            return res.status(200).json({ status: false, info: "Nenhum usuário encontrado." })
+            return res.status(404).json({ status: false, info: "Nenhum usuário encontrado." })
         }
 
         UserData = Usuario
@@ -35,7 +35,7 @@ router.post('/user/read', async (req, res) =>{
         //Buscando usuario unico
         const Usuario = await ReadUser(userID)
         if(!Usuario){
-            return res.status(200).json({ status: false, info: "Nenhum usuário encontrado." })
+            return res.status(404).json({ status: false, info: "Nenhum usuário encontrado." })
         }
 
         UserData = Array(Usuario)
@@ -52,7 +52,7 @@ router.post('/user/read', async (req, res) =>{
         }
 
         if(!Usuario[0]){
-            return res.status(200).json({ status: false, info: "Nenhum usuário encontrado." })
+            return res.status(404).json({ status: false, info: "Nenhum usuário encontrado." })
         }
 
         UserData = Usuario
@@ -60,7 +60,7 @@ router.post('/user/read', async (req, res) =>{
     
     //verificando se existe algum registro
     if(!UserData){
-        return res.status(200).json({ status: false, info: `Nenhum usuário encontrado` })
+        return res.status(404).json({ status: false, info: `Nenhum usuário encontrado` })
     };
     
     //criando resposta para usuario final

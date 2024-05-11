@@ -24,12 +24,12 @@ router.post('/user/create', async (req, res) =>{
 
     //Verifica se email existe na base de dados
     if(await ReadEmail(email)){
-        return res.status(200).json({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
+        return res.status(409).json({ status: false, info: "Desculpe, o email fornecido já está em uso. Por favor, escolha outro email." })
     }
 
     //verifica se email é valido
     if(!await validateEmail(email)){
-        return res.status(200).json({ status: false, info: "Informe um email válido." })
+        return res.status(500).json({ status: false, info: "Informe um email válido." })
     }
 
     //configurando dados para a inserção
@@ -44,7 +44,7 @@ router.post('/user/create', async (req, res) =>{
 
     //verificando se registro foi criado
     if(!newUser?.insertId){
-        return res.status(200).json({ status: false, info: `Ocorreu um erro ao registrar ${name}.` })
+        return res.status(500).json({ status: false, info: `Ocorreu um erro ao registrar ${name}.` })
     };
     
     //criando resposta para usuario final
